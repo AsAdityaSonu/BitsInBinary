@@ -25,7 +25,7 @@ def add_logo(image, logo_path, position):
         print("Error: Logo not found!")
         return image
 
-    logo_height, logo_width = 200, 500  
+    logo_height, logo_width = 150, 400  
     logo = cv2.resize(logo, (logo_width, logo_height))
 
     y_offset, x_offset = position
@@ -94,9 +94,9 @@ def generate_video(output_path, question, options, duration=15, fps=30, logo_pat
 
     blank_frame = np.array(pil_image)
 
-    logo_height = 200  
+    logo_height = 150  
     y_logo_position = height - 320 - logo_height
-    x_logo_position = (width - 500) // 2  
+    x_logo_position = (width - 400) // 2  
 
     blank_frame = add_logo(blank_frame, logo_path, (y_logo_position, x_logo_position))
 

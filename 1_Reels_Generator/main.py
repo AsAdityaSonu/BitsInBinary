@@ -3,20 +3,22 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
 def wrap_text(text, max_width, font, draw):
-    words = text.split()
     lines = []
-    current_line = ""
+    for line in text.split("\n"):  
+        words = line.split()
+        current_line = ""
 
-    for word in words:
-        test_line = current_line + " " + word if current_line else word
-        bbox = draw.textbbox((0, 0), test_line, font=font)
-        text_width = bbox[2] - bbox[0]
-        if text_width > max_width:
-            lines.append(current_line)
-            current_line = word
-        else:
-            current_line = test_line
-    lines.append(current_line)
+        for word in words:
+            test_line = current_line + " " + word if current_line else word
+            bbox = draw.textbbox((0, 0), test_line, font=font)
+            text_width = bbox[2] - bbox[0]
+            if text_width > max_width:
+                lines.append(current_line)
+                current_line = word
+            else:
+                current_line = test_line
+        lines.append(current_line)
+
     return lines
 
 def add_logo(image, logo_path, position):
@@ -106,7 +108,7 @@ def generate_video(output_path, question, options, duration=15, fps=30, logo_pat
     video.release()
     print(f"Video saved at {output_path}")
 
-generate_video('output.mp4', 'What is the time complexity of binary search in a sorted array?',
-               ['O(n)', 'O(log n)', 'O(n log n)', 'O(1)'], 
-               logo_path="Reels Generator/logo.png",
-               font_path="Reels Generator/Roboto-Variable.ttf")
+generate_video('output.mp4', "Predict Output:\nprint(\"abc\" * 3 == 3 * \"abc\")",
+               ['True', 'False', 'abcabcabcabcabcabc', 'Error'], 
+               logo_path="1_Reels_Generator/logo.png",
+               font_path="1_Reels_Generator/Roboto-Variable.ttf")
